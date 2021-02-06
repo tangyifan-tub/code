@@ -1,0 +1,554 @@
+#include<stdio.h>
+//编写一个函数，能够倒置字符串
+//#include<string.h>
+//void reverse(char *str)
+//{
+//	int len=strlen(str);
+//	char* left=str;
+//	char*right=str+len-1;
+//	while(left<right)
+//	{
+//		char tmp=*left;
+//		*left=*right;
+//		*right=tmp;
+//		left++;
+//		right--;
+//	}
+//}
+//int main()
+//{
+//	char arr[]="abcdef";
+//	reverse(arr);
+//	printf("%s",arr);
+//	return 0;
+//}
+
+
+
+
+
+
+//求sn=a+aa+aaa+aaaa的和，其中a是一个自定义数字，和的个数也自定义
+//int main()
+//{
+//	int a=0;
+//	int n=0;
+//	int i=0;
+//	int ret=0;
+//	int sum=0;
+//	scanf("%d%d",&a,&n);
+//	for(i=0;i<n;i++)
+//	{
+//		ret=ret*10+a;
+//		sum=sum+ret;
+//	}
+//	printf("%d",sum);
+//	return 0;
+//}
+
+
+
+
+
+
+
+//求0到10000之间的水仙花数（水仙花数就是例如153=1^3+5^3+3^3,1234=1^4+2^4+3^4+4^4）
+//#include<math.h>
+//int main()
+//{
+//	int i=0;
+//	for(i=0;i<10000;i++)
+//	{
+//		int tmp=i;
+//		int n=1;
+//		int sum=0;
+//		while(tmp/10)
+//		{
+//			n++;
+//			tmp=tmp/10;
+//		}
+//		tmp=i;
+//		while(tmp)
+//		{
+//			
+//			sum=sum+pow(tmp%10,n);
+//			tmp=tmp/10;
+//		}
+//		if(sum==i)
+//		{
+//			printf("%d ",i);
+//		}
+//	}
+//	
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+//打印一个菱形方块
+//int main()
+//{
+//	int line=0;
+//	int i=0;
+//	scanf("%d",&line);
+//	for(i=0;i<line;i++)
+//	{
+//		int j=0;
+//		for(j=0;j<line-1-i;j++)
+//		{
+//			printf(" ");
+//		}
+//		for(j=0;j<2*i+1;j++)
+//		{
+//			printf("*");
+//		}
+//		printf("\n");
+//
+//	}
+//	for(i=0;i<line-1;i++)
+//	{
+//		int j=0;
+//		for(j=0;j<=i;j++)
+//		{
+//			printf(" ");
+//		}
+//		for(j=0;j<2*(line-1-i)-1;j++)
+//		{
+//			printf("*");
+//
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+//有二十块钱可以买汽水，一瓶汽水一块钱，两个空瓶可以换一瓶汽水，总共可以喝多少瓶？
+//int main()
+//{
+//	int money=0;
+//	int total=0;
+//	int empty=0;
+//	scanf("%d",&money);
+//	total=money;
+//	empty=total;
+//	while(empty>=2)
+//	{
+//		total=total+empty/2;
+//		empty=empty/2+empty%2;
+//	}
+//	printf("total=%d\n",total);
+//	return 0;
+//
+//}
+
+
+
+
+
+
+
+
+//实现strcpy
+//void my_strcpy(char*arr1,char*arr2)
+//{
+//	while(*arr2)
+//	{
+//		*arr1=*arr2;
+//		arr1++;
+//		arr2++;
+//	}
+//	*arr1='\0';
+//}
+//int main()
+//{
+//	char arr1[]="abcdefgh";
+//	char arr2[]="###";
+//	
+//	my_strcpy(arr1,arr2);
+//	printf("%s\n",arr1);
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//将数组中的偶数放在后面，奇数放在前面
+//void move(int arr[],int sz)
+//{
+//	int left=0;
+//	int right=sz-1;
+//	
+//	while(left<right)
+//	{
+//		while(left<right&&arr[left]%2==1)
+//	{
+//		left++;
+//	}
+//	while(left<right&&arr[right]%2==0)
+//	{
+//		right--;
+//	}
+//	if(left<right)
+//	{
+//		int tmp=arr[left];
+//		arr[left]=arr[right];
+//		arr[right]=tmp;
+//	}
+//		
+//	
+//	}
+//}
+//int main()
+//{
+//	int arr[]={1,2,3,4,5,6,7,8,9,10};
+//	int sz=sizeof(arr)/sizeof(arr[0]);
+//	int i=0;
+//	move(arr,sz);
+//	for(i=0;i<sz;i++)
+//	{
+//		printf("%d ",arr[i]);
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+//打印出杨辉三角
+//int main()
+//{
+//	int arr[10][10]={0};
+//	int i=0;
+//	int j=0;
+//	for(i=0;i<10;i++)
+//	{
+//		for(j=0;j<=i;j++)
+//		{
+//			if(j==0)
+//			{
+//				arr[i][j]=1;
+//			}
+//			if(j==i)
+//			{
+//				arr[i][j]=1;
+//			}
+//			if(i>=2&&j>=1)
+//			{
+//				arr[i][j]=arr[i-1][j-1]+arr[i-1][j];
+//			}
+//		}
+//	}
+//	for(i=0;i<10;i++)
+//	{
+//		for(j=0;j<=i;j++)
+//		{
+//			printf("%d ",arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//寻找凶手的问题
+//a说凶手不是他
+//b说凶手是c
+//c说凶手是d
+//d说c在胡说
+//已知三个人说了真话，一个人说了假话，求哪个人是凶手
+//int main()
+//{
+//	int killer=0;
+//	for(killer='a';killer<='d';killer++)
+//	{
+//		if((killer!='a')+(killer=='c')+(killer=='d')+(killer!='d')==3)
+//		{
+//			printf("killer=%c",killer);
+//		}
+//	}
+//	
+//	return 0;
+//}
+
+
+
+
+
+
+
+//五位运动员参加跳水，有人预测名次
+//a选手说：b第二，我第3
+//b选手说：我第二，e第4
+//c选手说：我第一，d第2
+//d选手说：c最后，我第3
+//e选手说：我第四，a第1
+//每位选手只说对了一半，请求出比赛名次
+//int main()
+//{
+//	int a=0;
+//	int b=0;
+//	int c=0;
+//	int d=0;
+//	int e=0;
+//	for(a=1;a<=5;a++)
+//	{
+//		for(b=1;b<=5;b++)
+//		{
+//			for(c=1;c<=5;c++)
+//			{
+//				for(d=1;d<=5;d++)
+//				{
+//					for(e=1;e<=5;e++)
+//					{
+//						if(((a==3)+(b==2)==1)&&((b==2)+(e==4)==1)&&((c==1)+(d==2)==1)&&((c==5)+(d==3)==1)&&((e==4)+(a==1)==1))
+//						{
+//							if(a*b*c*d*e==120)
+//							printf("a=%d,b=%d,c=%d,d=%d,e=%d\n",a,b,c,d,e);
+//							
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+//左旋两个字符串，如abcde左旋两个变成cdeab
+//#include<string.h>
+//void left_move(char arr[],int k)
+//{
+//	int i=0;
+//	int len=strlen(arr);
+//	for(i=0;i<k;i++)
+//	{
+//		char tmp=arr[0];
+//		int j=0;
+//		for(j=0;j<len-1;j++)
+//		{
+//			arr[j]=arr[j+1];
+//
+//		}
+//		arr[len-1]=tmp;
+//	}
+//}
+//int main()
+//{
+//	char arr[]="abcdef";
+//	
+//	left_move(arr,2);
+//	printf("%s\n",arr);
+//	return 0;
+//}
+
+
+
+
+
+
+
+//第二种方法进行左旋字符串，用三步旋转
+//#include<string.h>
+//void reverse(char*left,char*right)
+//{
+//	while(left<right)
+//	{
+//		char tmp=*left;
+//	    *left=*right;
+//	    *right=tmp;
+//		left++;
+//		right--;
+//	}
+//}
+//void left_move(char*arr,int k)
+//{
+//	int len=strlen(arr);
+//	reverse(arr,(arr+k-1));
+//	reverse((arr+k),(arr+len-1));
+//	reverse(arr,(arr+len-1));
+//
+//}
+//int main()
+//{
+//	char arr[]="abcdef";
+//	
+//	left_move(arr,2);
+//	printf("%s\n",arr);
+//	return 0;
+//}
+
+
+
+
+//判断两个数组能不能通过左旋得到，如cdefab是abcdef左旋得来的
+//#include<string.h>
+//void left_move(char*arr,int k)
+//{
+//	int i=0;
+//	int len=strlen(arr);
+//	for(i=0;i<k;i++)
+//	{
+//		int tmp=*arr;
+//		int j=0;
+//		for(j=0;j<len-1;j++)
+//		{
+//			*(arr+j)=*(arr+j+1);
+//
+//		}
+//		*(arr+len-1)=tmp;
+//	}
+//}
+//int is_left_move(char*arr1,char*arr2)
+//{
+//	int len=strlen(arr2);
+//	int i=0;
+//	for(i=0;i<len;i++)
+//	{
+//		int ret;
+//		left_move(arr2,1);
+//	    ret=strcmp(arr1,arr2);
+//		if(ret==0)
+//	    {
+//		   return 1;
+//	    }
+//	
+//	}
+//	return 0;
+//
+//	
+//}
+//int main()
+//{
+//	char arr1[]="abcdef";
+//	char arr2[]="cdefab";
+//	int ret=is_left_move(arr1,arr2);
+//	if(ret==1)
+//	{
+//		printf("yes\n");
+//	}
+//	if(ret==0)
+//	{
+//		printf("no\n");
+//	}
+//	return 0;
+//}
+
+
+
+
+
+//用另一种方法求两个数组是不是通过左旋得到的
+//#include<string.h>
+//int is_left_move(char*arr1,char*arr2)
+//{
+//	int len1=strlen(arr1);
+//	int len2=strlen(arr2);
+//	char*ret;
+//	if(len1!=len2)
+//	{
+//		return 0;
+//	}
+//	
+//	strncat(arr1,arr1,6);
+//	ret=strstr(arr1,arr2);
+//	if(ret==NULL)
+//	{
+//		return 0;
+//	}
+//	else
+//	{
+//		return 1;
+//	}
+//}
+//int main()
+//{
+//	char arr1[30]="abcdef";
+//	char arr2[]="cdefab";
+//	int ret=is_left_move(arr1,arr2);
+//	if(ret==1)
+//	{
+//		printf("yes\n");
+//	}
+//	if(ret==0)
+//	{
+//		printf("no\0");
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//int find(int arr[3][3],int k,int row,int col)
+//{
+//	int x=0;
+//	int y=col-1;
+//	while(x<=row-1&&y>=0)
+//	{
+//		if(arr[x][y]>k)
+//		{
+//			y--;
+//		}
+//		else if(arr[x][y]<k)
+//		{
+//			x++;
+//		}
+//		else
+//		{
+//			return 1;
+//		}
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//	int arr[3][3]={{1,2,3},{4,5,6},{7,8,9}};
+//	int k=7;
+//	int ret=find(arr,k,3,3);
+//	if(ret==1)
+//	{
+//		printf("找到了\n");
+//	}
+//	if(ret==0)
+//	{
+//		printf("没找到\n");
+//	}
+//
+//	return 0;
+//}

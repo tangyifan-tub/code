@@ -1,0 +1,33 @@
+#include<stdio.h>
+
+
+typedef struct stu
+{
+	char name[10];
+	int age;
+	char sex[10];
+	char tel[10];
+}stu;
+
+void print1(stu tmp )//这种方法是把这个数组传上去
+{
+	printf("%s\n",tmp.name);
+	printf("%d\n",tmp.age);
+	printf("%s\n",tmp.sex);
+	printf("%s\n",tmp.tel);
+}
+void print2(stu* tmp)//这种方法是把这个数组的地址传上去
+{
+	printf("%s\n",tmp->name);
+	printf("%d\n",tmp->age);
+	printf("%s\n",tmp->sex);
+	printf("%s\n",tmp->tel);
+}
+int main()
+{
+	stu s1={"张三",20,"男","12121233"};
+	print1(s1);
+	print2(&s1);
+	
+	return 0;
+}

@@ -1,0 +1,108 @@
+#include<stdio.h>
+//int Fib(int i)//求斐波那契数的优化算法
+//{
+//	int a=1;
+//	int b=1;
+//	int c=1;
+//	while(i>2)
+//	{
+//		c=a+b;
+//		a=b;
+//		b=c;
+//		i--;
+//	}
+//
+//		return c;
+//
+//}
+//int main()
+//{
+//	int i=0;
+//	int ret=0;
+//	scanf("%d",&i);
+//	ret=Fib(i);
+//	printf("%d\n",ret);
+//	return 0;
+//}
+
+
+
+
+//int Fib(int i)//利用递归去求斐波那契数
+//{
+//	if(i<=2)
+//		return 1;
+//	else
+//		return Fib(i-1)+Fib(i-2);
+//}
+//int main()
+//{
+//	int i=0;
+//	int ret=0;
+//	scanf("%d",&i);
+//	ret=Fib(i);
+//	printf("%d\n",ret);
+//	return 0;
+//}
+
+
+
+
+
+//int Fac(int i)//用递归的方式去算n的阶乘
+//{
+//	if(i<=1)
+//		return 1;
+//	else
+//		return i*Fac(i-1);
+//}
+//int main()
+//{
+//	int i=0;
+//	int ret=0;
+//	scanf("%d",&i);
+//	ret=Fac(i);
+//	printf("%d\n",ret);
+//	return 0;
+//}
+
+
+
+
+
+
+//int my_strlen(char* str)//用递归的方式求字节长度
+//{
+//	if(*str!='\0')
+//		return 1+my_strlen(str+1);
+//	else
+//		return 0;
+//
+//}
+//int main()
+//{
+//	char arr[]={"bit"};
+//	int len=my_strlen(arr);
+//	printf("%d\n",len);
+//	return 0;
+//}
+
+
+
+
+//void print(int n)//利用函数递归将1234这个数字一个一个打印出来
+//{
+//	if(n>9)
+//	{
+//		print(n/10);
+//	}
+//	printf("%d ",n%10);
+//}
+//int main()
+//{
+//	unsigned int num=0;
+//	scanf("%d",&num);
+//	print(num);
+//
+//	return 0;
+//}
