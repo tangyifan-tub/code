@@ -1,0 +1,126 @@
+#include"contact.h"
+void Initcontact(struct contact*ps)
+{
+	memset(ps->date,0,sizeof(ps->date));//使用memset对通讯录进行初始化，将里面内容先全变为0
+	ps->size=0;//将里面的内容大小初始化为0
+}
+void Addcontact(struct contact*ps)
+{
+	if(ps->size==MAX)//先判断通讯录是否已满
+	{
+		printf("通讯录已满\n");
+	}
+	else
+	{
+		printf("请输入姓名：");//录入通讯录信息
+	    scanf("%s",ps->date[ps->size].name);
+	    printf("请输入年龄：");
+	    scanf("%d",&(ps->date[ps->size].age));//这边年龄要取地址
+		printf("请输入性别：");
+	    scanf("%s",ps->date[ps->size].sex);
+	    printf("请输入电话：");
+	    scanf("%s",ps->date[ps->size].tele);
+	    printf("请输入地址：");
+	    scanf("%s",ps->date[ps->size].addr);
+		ps->size++;
+		printf("添加成功\n");
+	}
+	
+}
+void Showcontact(struct contact*ps)
+{
+	int i=0;
+	if(ps->size==0)//先判断通讯录是否为空
+	{
+		printf("通讯录为空\n");
+	}
+	else
+	{
+		printf("%-10s\t%-4s\t%-5s\t%-20s\t%-20s\n","名字","年龄","性别","电话","住址");//这边先打印标题
+		
+		for(i=0;i<ps->size;i++)
+		{
+			printf("%-10s\t%-4d\t%-5s\t%-20s\t%-20s\n",ps->date[i].name,ps->date[i].age,ps->date[i].sex,ps->date[i].tele,ps->date[i].addr);
+		}
+		
+	}
+}
+int Find_name(struct contact*ps,char name[MAX_NAME] )//后面函数都会用到找名字这样一个功能，所移以将其封装成一个函数
+{
+	int i=0;
+	for(i=0;i<ps->size;i++)//从首地址开始找，用strcmp函数比较，找到相同的就返回该名字的地址i
+	{
+		if(strcmp(ps->date[i].name,name)==0)
+		{
+			return i;
+		}
+	}
+	return -1;//没找到就返回-1
+}
+void Delcontact(struct contact*ps)
+{
+	int pos;
+	char name[MAX_NAME];
+	printf("请输入要删除人的名字:");
+	scanf("%s",name);
+    pos=Find_name(ps,name);//将找名字返回来的下标用pos表示
+	if(pos==-1)
+	{
+		printf("此人不存在\n");
+	}
+	else//删除名字的方式是把后面一个元素覆盖到前面那个要删除的内容
+	{
+			int j=0;
+			for(j=pos;j<ps->size-1;j++)
+			{
+				ps->date[j]=ps->date[j+1];
+			}
+			ps->size--;//注意覆盖完之后最后一个元素会出现两个，所以size-1，让最后一个不出现就好了
+			printf("删除成功\n");
+		
+	}
+
+}
+void Searchcontact(struct contact*ps)
+{
+	int pos;
+	char name[MAX_NAME];
+	printf("请输入要查找人的名字:");
+	scanf("%s",name);
+	 pos=Find_name(ps,name);//同样用到Find_name这样一个函数
+	if(pos==-1)
+	{
+		printf("此人不存在\n");
+	}
+	else//找到这个名字的下标之后打印出来就好
+	{
+		printf("%-10s\t%-4s\t%-5s\t%-20s\t%-20s\n","名字","年龄","性别","电话","住址");
+		printf("%-10s\t%-4d\t%-5s\t%-20s\t%-20s\n",ps->date[pos].name,ps->date[pos].age,ps->date[pos].sex,ps->date[pos].tele,ps->date[pos].addr);
+		
+	}
+}
+void Modifycontact(struct contact*ps)
+{
+	int pos;
+	char name[MAX_NAME];
+	printf("请输入要修改的名字:");
+	scanf("%s",name);
+	 pos=Find_name(ps,name);
+	if(pos==-1)//修改名字实际上就是找到要修改名字的下标，重新录入一下
+	{
+		printf("名字不存在\n");
+	}
+	else
+	{
+		printf("请输入姓名：");
+	    scanf("%s",ps->date[pos].name);
+	    printf("请输入年龄：");
+	    scanf("%d",&(ps->date[pos].age));
+		printf("请输入性别：");
+	    scanf("%s",ps->date[pos].sex);
+	    printf("请输入电话：");
+	    scanf("%s",ps->date[pos].tele);
+	    printf("请输入地址：");
+	    scanf("%s",ps->date[pos].addr);
+	}
+}

@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define MAX_NAME 20
+#define MAX_SEX 10
+#define MAX_TEL 20
+#define MAX_ADDR 20
+#define MAX 1000
+struct PeoInfo
+{
+	char name[MAX_NAME];//name的长度用MAX_NAME表示，这样以后要改的话只要改MAX_NAME就可以了
+	int age;
+	char sex[MAX_SEX];
+	char tele[MAX_TEL];
+	char addr[MAX_ADDR];
+};
+
+struct contact
+{
+	struct PeoInfo date[MAX];//用结构体的形式去封装结构体date和size
+	int size;
+};
+
+void Initcontact(struct contact*ps);
+void Addcontact(struct contact*ps);
+void Showcontact(struct contact*ps);
+void Delcontact(struct contact*ps);
+void Searchcontact(struct contact*ps);
+void Modifycontact(struct contact*ps);
+
