@@ -1,0 +1,243 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<errno.h>
+//int main()
+//{
+//	int *p=(int*)malloc(10*sizeof(int));
+//	if(p==NULL)
+//	{
+//		printf("%s",strerror(errno));//打印错误原因
+//	}
+//	else
+//	{
+//		int i=0;
+//		for(i=0;i<10;i++)
+//		{
+//			*(p+i)=i;
+//		}
+//		for(i=0;i<10;i++)
+//		{
+//			printf("%d ",*(p+i));
+//		}
+//	}
+//	free(p);
+//	p=NULL;
+//	return 0;
+//}
+
+
+
+
+
+
+
+//int main()//calloc也是用来开辟动态内存，calloc会初识化为0，但malloc不会
+//{
+//	int*p=(int*)calloc(10,sizeof(int));
+//	if(p==NULL)
+//	{
+//		printf("%s\n",strerror(errno));
+//	}
+//	else
+//	{
+//		int i=0;
+//		for(i=0;i<10;i++)
+//		{
+//			printf("%d ",*(p+i));
+//		}
+//	}
+//	free(p);
+//	p=NULL;
+//	
+//	return 0;
+//}
+
+
+
+
+
+
+//int main()
+//{
+//	
+//	int*p=(int*)malloc(40);
+//	int *ptr=(int*)realloc(p,80);//realloc函数是用来调整开辟的内存空间
+//	int i=0;
+//	for(i-0;i<10;i++)
+//	{
+//		*(p+i)=i;
+//	}
+//	
+//	if(ptr!=NULL)
+//	{
+//		int j=0;
+//		p=ptr;
+//		
+//		for(j=0;j<20;j++)
+//		{
+//			*(p+j)=j;
+//		}
+//		for(j=0;j<20;j++)
+//		{
+//			printf("%d ",*(p+j));
+//		}
+//	}
+//	free(p);
+//	p=NULL;
+//	return 0;
+//}
+
+
+
+
+
+//经典面试题1
+//这个程序最终会崩溃，崩溃原因是这个getmemory函数吧str传过去是传值，不是传址，所以并没有返回，这个p开辟了空间后返回就被回收了
+//void getmemory(char*p)
+//{
+//	p=(char*)malloc(100);
+//}
+//void test()
+//{
+//	char*str=NULL;
+//	getmemory(str);
+//	strcpy(str,"hello,world");
+//	printf(str);
+//}
+//int main()
+//{
+//	test();
+//	return 0;
+//}
+
+
+//改正1
+//char* getmemory(char*p)//因为错误原因是p没有返回东西，所以我们把p开辟的空间返回过去就行了
+//{
+//	p=(char*)malloc(100);
+//	return p;
+//}
+//void test()
+//{
+//	char*str=NULL;
+//	str=getmemory(str);
+//	strcpy(str,"hello,world");
+//	printf(str);
+//}
+//int main()
+//{
+//	test();
+//	return 0;
+//}
+
+
+
+//改正2
+//void getmemory(char**p)//第二种改法就是把str地址传过去，传址就能直接改变地址中的内容
+//{
+//	*p=(char*)malloc(100);//这边接收使用char**p二级指针接收，然后*p解引用
+//}
+//void test()
+//{
+//	char*str=NULL;
+//	getmemory(&str);
+//	strcpy(str,"hello,world");
+//	printf(str);
+//}
+//int main()
+//{
+//	test();
+//	return 0;
+//}
+
+
+//经典笔试题2
+//char*getmemory()//这道题的错误原因在于return p的地址，但出了getmemory这个函数之后这个函数就被回收了，你再去访问这个地址就是非法访问，
+//{               //所以打印出来的就是随机值,并且这个函数是在栈区创建，会回收，如果在堆区或者静态区就不会                
+//	char p[]="hello,world";
+//	return p;
+//}
+//void test()
+//{
+//	char*str=NULL;
+//	str=getmemory();
+//	printf(str);
+//}
+//int main()
+//{
+//	test();
+//	return 0;
+//}
+
+
+//int *test()//这边可以的原因就是加上了static，这个a就在静态区了，不在栈区
+//{
+//	static int a=10;
+//	return &a;
+//}
+//int main()
+//{
+//	int *p=test();
+//	*p=20;
+//	printf("%d\n",*p);
+//	return 0;
+//}
+
+
+//经典面试题3
+//void test()//这道题的问题在于它吧str释放掉之后又去使用str，导致非法访问
+//{
+//	char*str=(char*)malloc(100);
+//	strcpy(str,"hello");
+//	free(str);//只要在free后面加上str=NULL就解决问题了
+//	if(str!=NULL)
+//	{
+//		strcpy(str,"world");
+//		printf(str);
+//	}
+//}
+//int main()
+//{
+//	
+//	test();
+//	return 0;
+//}
+
+
+
+
+
+struct S
+{
+	int n;
+	int arr[];//这个就是柔性数组的成员，数组的大小是可以调整的
+};
+int main()
+{
+	
+	struct S*ps=(struct S*)malloc(sizeof(struct S)+5*sizeof(int));
+	struct S*ptr=(struct S*)realloc(ps,44);
+	int i=0;
+	ps->n=100;
+	for(i=0;i<5;i++)
+	{
+		ps->arr[i]=i;
+	}
+	
+	if(ptr!=NULL)
+	{
+		ps=ptr;
+	}
+	for(i=5;i<10;i++)
+	{
+		ps->arr[i]=i;
+	}
+	for(i=0;i<10;i++)
+	{
+		printf("%d ",ps->arr[i]);
+	}
+	free(ps);
+	ps=NULL;
+	return 0;
+}
