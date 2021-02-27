@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct Queue
+{
+	int *pbase;
+	int front;
+	int rear;
+}Queue;
+void init(Queue*q)
+{
+	q->pbase=(int*)malloc(sizeof(int)*6);
+	if(q->pbase==NULL)
+	{
+		printf("开辟空间失败");
+	}
+	q->front=0;
+	q->rear=0;
+}
+int full_queue(Queue*q)
+{
+	if((q->rear+1)%6==q->front)
+		return 1;
+	else
+		return 0;
+		
+}
+void en_queue(Queue*q,int val)
+{
+	if(full_queue(q))
+	{
+		printf("队列已满");
+	}
+	else
+	{
+		q->pbase[q->rear]=val;
+		q->rear=(q->rear+1)%6;
+	}
+}
+void show_queue(Queue*q)
+{
+	int i=q->front;
+	while(i!=q->rear)
+	{
+		printf("%d ",q->pbase[i]);
+		i=(i+1)%6;
+	}
+	printf("\n");
+}
+int empty_queue(Queue*q)
+{
+	if(q->front==q->rear)
+		return 1;
+	else
+		return 0;
+	
+}
+int out_queue(Queue*q,int *val)
+{
+	if(empty_queue(q))
+	{
+		printf("队列为空");
+		return 0;
+	}
+	else
+	{
+		*val=q->pbase[q->front];
+		q->front=(q->front+1)%6;
+		return 1;
+	}
+}
+int main()
+{
+	int val;
+	Queue q;
+	init(&q);
+	en_queue(&q,2);
+	en_queue(&q,3);
+	show_queue(&q);
+	if(out_queue(&q,&val))
+	{
+		printf("出队列的数为：%d\n",val);
+	}
+	else
+	{
+		printf("出队失败");
+	}
+	show_queue(&q);
+
+
+	return 0;
+}
