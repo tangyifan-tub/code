@@ -1,0 +1,106 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct Node
+{
+	int data;
+	struct Node*next;
+}Node;
+typedef struct Stack
+{
+	Node*top;
+	Node*bottom;
+}Stack;
+void init(Stack*s)
+{
+	s->top=(Node*)malloc(sizeof(Node));
+	if(s->top==NULL)
+	{
+		printf("内存分配失败");
+	}
+	else
+	{
+		s->bottom=s->top;
+		s->top->next==NULL;
+	}
+}
+void push(Stack*s,int val)
+{
+	Node*pnew=(Node*)malloc(sizeof(Node));
+	if(pnew==NULL)
+	{
+		printf("动态内存开辟失败\n");
+	}
+	pnew->data=val;
+	pnew->next=s->top;
+	s->top=pnew;
+}
+void show_stack(Stack*s)
+{
+	Node*p=s->top;
+	while(p!=s->bottom)
+	{
+		printf("%d ",p->data);
+		p=p->next;
+	}
+	printf("\n");
+	
+}
+int empty(Stack*s)
+{
+	if(s->bottom==s->top)
+		return 1;
+	else
+	    return 0;
+}
+int pop(Stack*s,int *val)
+{
+	if(empty(s))
+	{
+		printf("栈为空\n");
+		return 0;
+	}
+	else
+	{
+		Node*r=s->top;
+		*val=r->data;
+		s->top=r->next;
+		free(r);
+		r==NULL;
+		return 1;
+
+	}
+}
+void clear_stack(Stack*s)
+{
+	Node*p=s->top;
+	Node*q=NULL;
+	while(p!=s->bottom)
+	{
+		q=p->next;
+		free(p);
+		p=q;
+	}
+	s->bottom=s->top;
+}
+int main()
+{
+	int val;
+	Stack s;
+	init(&s);
+	push(&s,1);
+	push(&s,2);
+	show_stack(&s);
+	if(pop(&s,&val))
+	{
+		printf("出栈成功，出栈的数为：%d\n",val);
+	}
+	else
+	{
+		printf("出栈失败");
+	}
+	show_stack(&s);
+	clear_stack(&s);
+	show_stack(&s);
+	return 0;
+}
