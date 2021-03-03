@@ -1,0 +1,44 @@
+#include<stdio.h>
+int findpos(int arr[],int low,int high)
+{
+	int val=arr[low];
+	while(low<high)
+	{
+		while(low<high && arr[high]>val)
+		{
+			high--;
+		}
+		arr[low]=arr[high];
+		while(low<high && arr[low]<val)
+		{
+			low++;
+		}
+		arr[high]=arr[low];
+	}
+	arr[low]=val;
+	return low;
+	
+}
+void qsort(int arr[],int low,int high)
+{
+	int pos;
+	if(low<high)
+	{
+		pos=findpos(arr,low,high);
+		qsort(arr,low,pos-1);
+		qsort(arr,pos+1,high);
+
+	}
+}
+int main()
+{
+	int i=0;
+	int arr[5]={3,5,1,6,9};
+	qsort(arr,0,4);
+	for(i=0;i<5;i++)
+	{
+		printf("%d ",arr[i]);
+	}
+
+	return 0;
+}
